@@ -42,5 +42,12 @@
     min-height: 40px;
     background-color: white;
     border-radius: 5px;
+
+    .checkinput {
+      border: 1px solid grey;
+      border-radius: 3px;
+      width: 20px;
+      height: 20px;
+    }
   }
 }

@@ -1,13 +1,30 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styles from './index.module.scss'
 
+interface TaskItem {
+  id: number;
+  text: string;
+  checked: boolean;
+}
+
 function App() {
-  const [toDoList, setToDoList] = useState([{}]);
+  const [ toDoList, setToDoList ] = useState<TaskItem[]>([]);
   const [ newTask, setNewTask ] = useState('')
 
   const addTask = () => {
     setToDoList([...toDoList, { id: toDoList.length + 1, text: newTask, checked: false }])
   }
+
+  const handleCheck = (id: number) => {
+    const updatedList = toDoList.map(task =>
+      task.id === id ? { ...task, checked: !task.checked } : task
+    );
+    setToDoList(updatedList);
+  };
+
+  useEffect(() => {
+    console.log(toDoList)
+  }, [toDoList])
 
   return (
     <div>
@@ -22,6 +39,7 @@ function App() {
         {
           toDoList.map((item) => (
             <div className={`${styles.task}`} key={item.id}>
+              <input type="checkbox" onChange={() => handleCheck(item.id)} checked={item.checked} className={`${styles.checkinput}`}/>
               <a>{item.text}</a>
             </div>
           ))
