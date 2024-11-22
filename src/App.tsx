@@ -1,30 +1,8 @@
-import { useEffect, useState } from 'react';
+import useTasks from './hooks/useTasks';
 import styles from './index.module.scss'
 
-interface TaskItem {
-  id: number;
-  text: string;
-  checked: boolean;
-}
-
 function App() {
-  const [ toDoList, setToDoList ] = useState<TaskItem[]>([]);
-  const [ newTask, setNewTask ] = useState('')
-
-  const addTask = () => {
-    setToDoList([...toDoList, { id: toDoList.length + 1, text: newTask, checked: false }])
-  }
-
-  const handleCheck = (id: number) => {
-    const updatedList = toDoList.map(task =>
-      task.id === id ? { ...task, checked: !task.checked } : task
-    );
-    setToDoList(updatedList);
-  };
-
-  useEffect(() => {
-    console.log(toDoList)
-  }, [toDoList])
+  const { toDoList, setNewTask, addTask, handleCheck } = useTasks();
 
   return (
     <div>
