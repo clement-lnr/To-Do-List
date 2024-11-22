@@ -8,7 +8,16 @@
   gap: 10px;
   width: 100%;
   height: 40px;
-
+  
+  .addinput {
+    height: auto;
+    flex-grow: 1;
+    padding: 0 10px;
+    background-color: white;
+    border: 1px solid grey;
+    border-radius: 8px;
+  }
+  
   .addbtn {
     height: auto;
     width: auto;
@@ -19,14 +28,9 @@
     border-radius: 8px;
     text-align: center;
   }
-  
-  .addinput {
-    height: auto;
-    flex-grow: 1;
-    padding: 0 10px;
-    background-color: white;
-    border: 1px solid grey;
-    border-radius: 8px;
+
+  .filter {
+    display: flex;
   }
 }
 

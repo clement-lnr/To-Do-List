@@ -1,5 +1,5 @@
 // useTasks.ts
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 interface TaskItem {
     id: number;
@@ -22,27 +22,18 @@ export default function useTasks() {
         localStorage.setItem('toDoList', JSON.stringify(toDoList));
     }, [toDoList])
   
-    const addTask = (taskName: string) => {
-        const newTask = {
-            id: toDoList.length + 1,
-            text: taskName,
-            checked: false
-        };
-        setToDoList([...toDoList, newTask]);
-    }
+    const addTask = useCallback((taskName: string) => {
+        setToDoList(prevToDoList => [...prevToDoList, { id: prevToDoList.length + 1, text: taskName, checked: false}]);
+    }, [])
 
-    const removeTask = (id: number) => {
-        const updatedList = toDoList.filter(task => task.id !== id);
-        setToDoList(updatedList);
-        toDoList.length === 1 && localStorage.removeItem('toDoList');
-    }
+    const removeTask = useCallback((id: number) => {
+        setToDoList(prevToDoList => prevToDoList.filter(task => task.id !== id));
+        localStorage.removeItem('toDoList');
+    }, []);
   
-    const handleCheck = (id: number) => {
-      const updatedList = toDoList.map(task =>
-        task.id === id ? { ...task, checked: !task.checked } : task
-      );
-      setToDoList(updatedList);
-    };
+    const handleCheck = useCallback((id: number) => {
+        setToDoList(prevToDoList => prevToDoList.map(task => task.id === id ? { ...task, checked: !task.checked } : task));
+    }, []);
 
     return { toDoList, addTask, removeTask, handleCheck };
 }
