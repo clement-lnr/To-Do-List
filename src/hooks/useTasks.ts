@@ -1,4 +1,5 @@
-import { useState } from "react";
+// useTasks.ts
+import { useEffect, useState } from "react";
 
 interface TaskItem {
     id: number;
@@ -8,17 +9,26 @@ interface TaskItem {
 
 export default function useTasks() {
     const [ toDoList, setToDoList ] = useState<TaskItem[]>([]);
-    const [ taskTitle, setTaskTitle ] = useState('');
-  
-    const addTask = () => {
-        if (taskTitle != '') {
-            const newTask = {
-                id: toDoList.length + 1,
-                text: taskTitle,
-                checked: false
-            };
-            setToDoList([...toDoList, newTask]);
+
+    useEffect (() => {
+        const data = localStorage.getItem('toDoList');
+        if (data) {
+            setToDoList(JSON.parse(data));
         }
+    }, []);
+
+    useEffect (() => {
+        toDoList.length > 0 &&
+        localStorage.setItem('toDoList', JSON.stringify(toDoList));
+    }, [toDoList])
+  
+    const addTask = (taskName: string) => {
+        const newTask = {
+            id: toDoList.length + 1,
+            text: taskName,
+            checked: false
+        };
+        setToDoList([...toDoList, newTask]);
     }
   
     const handleCheck = (id: number) => {
@@ -28,5 +38,5 @@ export default function useTasks() {
       setToDoList(updatedList);
     };
 
-    return { toDoList, setTaskTitle, addTask, handleCheck };
+    return { toDoList, addTask, handleCheck };
 }

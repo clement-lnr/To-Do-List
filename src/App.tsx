@@ -1,16 +1,27 @@
+// App.tsx
+import { useState } from 'react';
 import useTasks from './hooks/useTasks';
 import styles from './index.module.scss'
 
 function App() {
-  const { toDoList, setTaskTitle, addTask, handleCheck } = useTasks();
+  const { toDoList, addTask, handleCheck } = useTasks();
+
+  const [taskName, setTaskName] = useState('');
+
+  const sendTaskName = () => {
+    if (taskName !== '') {
+      addTask(taskName);
+      setTaskName('');
+    }
+  }
 
   return (
     <div>
       <h1 className={`${styles.title}`}>ToDo</h1>
 
       <div className={`${styles.todohandler}`}>
-        <input type="text" placeholder='Nom de la tache...' onChange={(e) => setTaskTitle(e.target.value)} className={`${styles.addinput}`}/>
-        <button onClick={() => addTask()} className={`${styles.addbtn}`}>Ajouter la tache</button>
+        <input type="text" placeholder='Nom de la tache...' onChange={(e) => setTaskName(e.target.value)} className={`${styles.addinput}`}/>
+        <button onClick={() => sendTaskName()} className={`${styles.addbtn}`}>Ajouter la tache</button>
       </div>
       
       <div className={`${styles.todolist}`}>
