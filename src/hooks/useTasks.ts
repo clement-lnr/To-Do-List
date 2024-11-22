@@ -8,10 +8,17 @@ interface TaskItem {
 
 export default function useTasks() {
     const [ toDoList, setToDoList ] = useState<TaskItem[]>([]);
-    const [ newTask, setNewTask ] = useState('')
+    const [ taskTitle, setTaskTitle ] = useState('');
   
     const addTask = () => {
-      newTask && setToDoList([...toDoList, { id: toDoList.length + 1, text: newTask, checked: false }])
+        if (taskTitle != '') {
+            const newTask = {
+                id: toDoList.length + 1,
+                text: taskTitle,
+                checked: false
+            };
+            setToDoList([...toDoList, newTask]);
+        }
     }
   
     const handleCheck = (id: number) => {
@@ -21,5 +28,5 @@ export default function useTasks() {
       setToDoList(updatedList);
     };
 
-    return { toDoList, setNewTask, addTask, handleCheck };
+    return { toDoList, setTaskTitle, addTask, handleCheck };
 }

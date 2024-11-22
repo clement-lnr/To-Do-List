@@ -2,14 +2,14 @@ import useTasks from './hooks/useTasks';
 import styles from './index.module.scss'
 
 function App() {
-  const { toDoList, setNewTask, addTask, handleCheck } = useTasks();
+  const { toDoList, setTaskTitle, addTask, handleCheck } = useTasks();
 
   return (
     <div>
       <h1 className={`${styles.title}`}>ToDo</h1>
 
       <div className={`${styles.todohandler}`}>
-        <input type="text" placeholder='Nom de la tache...' onChange={(e) => setNewTask(e.target.value)} className={`${styles.addinput}`}/>
+        <input type="text" placeholder='Nom de la tache...' onChange={(e) => setTaskTitle(e.target.value)} className={`${styles.addinput}`}/>
         <button onClick={() => addTask()} className={`${styles.addbtn}`}>Ajouter la tache</button>
       </div>
       
