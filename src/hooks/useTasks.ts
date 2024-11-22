@@ -30,6 +30,12 @@ export default function useTasks() {
         };
         setToDoList([...toDoList, newTask]);
     }
+
+    const removeTask = (id: number) => {
+        const updatedList = toDoList.filter(task => task.id !== id);
+        setToDoList(updatedList);
+        toDoList.length === 1 && localStorage.removeItem('toDoList');
+    }
   
     const handleCheck = (id: number) => {
       const updatedList = toDoList.map(task =>
@@ -38,5 +44,5 @@ export default function useTasks() {
       setToDoList(updatedList);
     };
 
-    return { toDoList, addTask, handleCheck };
+    return { toDoList, addTask, removeTask, handleCheck };
 }

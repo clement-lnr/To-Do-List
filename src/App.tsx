@@ -4,7 +4,7 @@ import useTasks from './hooks/useTasks';
 import styles from './index.module.scss'
 
 function App() {
-  const { toDoList, addTask, handleCheck } = useTasks();
+  const { toDoList, addTask, removeTask, handleCheck } = useTasks();
 
   const [taskName, setTaskName] = useState('');
 
@@ -30,6 +30,7 @@ function App() {
             <div className={`${styles.task}`} key={item.id}>
               <input type="checkbox" onChange={() => handleCheck(item.id)} checked={item.checked} className={`${styles.checkinput}`}/>
               <a>{item.text}</a>
+              <button onClick={() => removeTask(item.id)}>Supprimer</button>
             </div>
           ))
         }
