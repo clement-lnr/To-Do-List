@@ -1,3 +1,131 @@
-.title {
-  font-size: var(--font-size-xl);
+.wrapper {
+  align-self: center;
+  width: 70%;
+  margin: auto;
+
+  .header {
+    width: 100%;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+
+    .title {
+      font-size: var(--font-size-xl);
+      font-weight: 500;
+    }
+
+    .clock {
+      font-size: var(--font-size-s);
+      font-weight: 200;
+      color: rgb(90, 90, 90);
+    }
+    
+    .todohandler {
+      display: flex;
+      flex-direction: row;
+      gap: 10px;
+      width: 100%;
+      height: 40px;
+      
+      .addinput {
+        height: auto;
+        flex-grow: 1;
+        padding: 0 10px;
+        background-color: white;
+        border: 1px solid grey;
+        border-radius: 8px;
+      }
+      
+      .addbtn {
+        height: auto;
+        width: auto;
+        padding: 0 20px;
+        white-space: nowrap;
+        background-color: rgb(114, 10, 205);
+        color: white;
+        border-radius: 8px;
+        text-align: center;
+      }
+      
+      .filter {
+        display: flex;
+        text-align: center;
+        background-color: white;
+        border-radius: 8px;
+      }
+    }
+  }
+
+  .todolist {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 7px;
+
+    .task {
+      position: relative;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      height: 40px;
+      background-color: white;
+      border-radius: 5px;
+      padding: 0 15px;
+
+      .lefttaskitems {
+        display: flex;
+        flex-direction: row;
+        gap: 15px;
+
+        .checkinput {
+          border: 2px solid var(--tertiary-color);
+          border-radius: 3px;
+          width: 20px;
+          height: 20px;
+
+          &:checked {
+            background-color: #720acd;
+          }
+        }
+      }
+      
+      .showsettings {
+        width: 30px;
+        height: 30px;
+        background-color: var(--quaternary-color);
+        border-radius: 5px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+      }
+      
+      .settingslist {
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        bottom: calc(100% - 5px);
+        right: 15px;
+        border: 1px solid var(--quaternary-color);
+        border-radius: 5px;
+        
+        .setting {
+          height: 30px;
+          background-color: white;
+          width: auto;
+          padding: 0 20px;
+          border-radius: 5px;
+          
+          &:hover {
+            background-color: var(--quaternary-color);
+          }
+        }
+      }
+    }
+  }
 }
